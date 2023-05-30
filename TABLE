@@ -127,4 +127,5 @@ BEGIN
 	SET TongTien = (GiaVe * SoVeDaBan) FROM LichChieu join inserted on LichChieu.MaShow = inserted.MaShow 
 	WHERE LichChieu.MaShow = inserted.MaShow 
 END
-
+---text------
+-----import------
