@@ -1,6 +1,6 @@
-CREATE DATABASE CINEMA1
+CREATE DATABASE CINEMA
 GO
-USE CINEMA1 
+USE CINEMA
 GO
 CREATE TABLE HangSX(
 	MaHangSX varchar(10) not null,
@@ -63,20 +63,18 @@ CREATE TABLE PhongChieu(
 	constraint FK_MARAP1 foreign key (MaRap) references RAP(MaRap)
 );
 
-create TABLE Ve(
-	MaGhe varchar(10) not null ,
+
+CREATE TABLE Ve(
+	MaVe varchar(10) not null primary key,
 	MaShow varchar(10) not null,
-	constraint pk_ve primary key (MaGhe,MaShow)
-);
-CREATE TABLE PhongChieuGhe(
 	MaRap varchar(10) not null,
 	MaPhong varchar(10) not null,
-	MaGhe varchar(10) not null primary key,
+	MaGhe varchar(10) not null ,
 	TrangThai varchar(10),
 	constraint fk_MaPhong foreign key(MaPhong) references PhongChieu(MaPhong),
 	constraint fk_MaRap2 foreign key (MaRap) references RAP(MaRap),
 );
-alter table Ve add constraint fk_MaGhe1 foreign key (MaGhe) references PhongChieuGhe(MaGhe);
+
 
 CREATE TABLE LichChieu(
 	MaShow varchar(10) not null,
