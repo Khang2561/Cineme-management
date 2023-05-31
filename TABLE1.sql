@@ -142,7 +142,7 @@ INSERT [dbo].[Phim] ([MaPhim], [TenPhim], [MaHangSX], [DaoDien],[MaTheLoai],MaNu
 INSERT [dbo].[Phim] ([MaPhim], [TenPhim], [MaHangSX], [DaoDien],[MaTheLoai],MaNuocSX , [NgayKhoiChieu], [NgayKetThuc], [TongThu]) VALUES (N'CN11', N'3 chàng ngốc',  N'VC20', N'Rajkumar Hirani', N'HH03','TL', N'25/12/2009', N'21/12/2010', 70000000)
 GO
 
-
+---
 --trigger 
 --1/ cập nhập số vé đã bán và tổng doanh thu mà lịch chiếu đó đã bán 
 CREATE trigger SoVeDaBan on Ve after INSERT AS
