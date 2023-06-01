@@ -150,7 +150,7 @@ Begin
 	UPDATE LichChieu
 	SET TongTien = (GiaVe * SoVeDaBan); 
 END
---2/CAP NHAP SO RAP TRONG PHONG CHIEU 
+--2/cap nhap so phong chieu trong rap 
 CREATE TRIGGER SoPhongRap ON PhongChieu AFTER INSERT AS
 BEGIN
 	UPDATE RAP 
@@ -158,7 +158,7 @@ BEGIN
 	from RAP join inserted on RAP.MaRap = inserted.MaRap 
 END 
 --3/ CAP NHAP TONG SO GHE CUA MOT RAP 
-CREAT TRIGGER TongSoGheRap ON PhongChieu AFTER INSERT AS 
+CREATe TRIGGER TongSoGheRap ON PhongChieu AFTER INSERT AS 
 BEGIN 
 	UPDATE RAP
 	SET TongSoGhe = RAP.TongSoGhe + (select TongSoGhe from inserted where MaRap = RAP.MaRap) from RAP join inserted on RAP.MaRap=inserted.MaRap
@@ -170,5 +170,48 @@ BEGIN
 	SET TongTien = (GiaVe * SoVeDaBan) FROM LichChieu join inserted on LichChieu.MaShow = inserted.MaShow 
 	WHERE LichChieu.MaShow = inserted.MaShow 
 END
+
+-- store procedure 
+--1/ thêm tên phim vào danh sách 
+CREATE PROCEDURE AddPhim
+(
+    @MaPhim VARCHAR(10),
+    @TenPhim VARCHAR(50),
+    @MaHangSX VARCHAR(10),
+    @DaoDien VARCHAR(20),
+    @MaTheLoai VARCHAR(10),
+	@MaNuocSX VARCHAR(10),
+    @NgayKhoiChieu SMALLDATETIME,
+    @NgayKetThuc SMALLDATETIME,
+    @TongThu MONEY
+)
+AS
+BEGIN
+    -- Kiểm tra xem Mã hãng sản xuất có tồn tại trong bảng HangSX chưa
+    -- Kiểm tra tính hợp lệ của các tham số đầu vào
+    IF NOT EXISTS (SELECT * FROM NuocSX WHERE MaNuocSX = @MaNuocSX)
+    BEGIN
+        PRINT('Mã nước sản xuất không tồn tại', 16, 1)
+        RETURN
+    END
+    
+    IF NOT EXISTS (SELECT * FROM HangSX WHERE MaHangSX = @MaHangSX)
+    BEGIN
+        PRINT('Mã hãng sản xuất không tồn tại', 16, 1)
+        RETURN
+    END
+    
+    IF NOT EXISTS (SELECT * FROM TheLoai WHERE MaTheLoai = @MaTheLoai)
+    BEGIN
+        PRINT('Mã thể loại không tồn tại', 16, 1)
+        RETURN
+    END
+    INSERT INTO Phim (MaPhim,TenPhim ,MaHangSX,DaoDien,MaTheLoai ,MaNuocSX,NgayKhoiChieu ,NgayKetThuc ,TongThu)
+    VALUES (@MaPhim,@TenPhim ,@MaHangSX,@DaoDien,@MaTheLoai ,@MaNuocSX,@NgayKhoiChieu ,@NgayKetThuc ,@TongThu)
+	PRINT ('Dữ liệu đã được thêm vào thành công ')
+END
+
+
+
 ---text------
 -----import------
