@@ -29,8 +29,6 @@ CREATE TABLE Phim(
 	MaTheLoai VARCHAR(10) NOT NULL,
 	NgayKhoiChieu SMALLDATETIME,
 	NgayKetThuc SMALLDATETIME,
-	NoiDungChinh text,
-	TongChiPhi money  DEFAULT 0,
 	TongThu money  DEFAULT 0,
 	CONSTRAINT PK_Phim primary key (MaPhim),
 	CONSTRAINT FK_MaHangSX foreign key (MaHangSX) REFERENCES HangSX(MaHangSX),
