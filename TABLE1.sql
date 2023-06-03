@@ -66,9 +66,9 @@ CREATE TABLE PhongChieu(
 
 CREATE TABLE Ve(
 	MaVe varchar(10) not null primary key,
-	MaShow varchar(10) not null,
 	MaRap varchar(10) not null,
 	MaPhong varchar(10) not null,
+	MaShow varchar(10) not null,
 	MaGhe varchar(10) not null ,
 	TrangThai varchar(10),
 	constraint fk_MaPhong foreign key(MaPhong) references PhongChieu(MaPhong),
