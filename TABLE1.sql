@@ -222,23 +222,14 @@ VALUES
 ('V026', 'CGV04', 'PC01', 'LS09', 'G07', 'Đã bán')
 CREATE TRIGGER SoPhongRap ON PhongChieu AFTER INSERT AS
 BEGIN
+	UPDATE RAP
+	SET TongSoGhe = RAP.TongSoGhe + (select TongSoGhe from inserted where MaRap = RAP.MaRap) 
+	from RAP join inserted on RAP.MaRap=inserted.MaRap
 	UPDATE RAP 
 	SET SoPhong = ( select count(MaPhong) from PhongChieu where MaRap= RAP.MaRap) 
 	from RAP join inserted on RAP.MaRap = inserted.MaRap 
 END 
---3/ CAP NHAP TONG SO GHE CUA MOT RAP 
-CREATe TRIGGER TongSoGheRap ON PhongChieu AFTER INSERT AS 
-BEGIN 
-	UPDATE RAP
-	SET TongSoGhe = RAP.TongSoGhe + (select TongSoGhe from inserted where MaRap = RAP.MaRap) from RAP join inserted on RAP.MaRap=inserted.MaRap
-END
---4/ CAP NHAP TONG SO TIEN KHO Co VE THAY DOI PHIM 
-Create trigger TongTienudt on Ve AFTER UPDATE AS 
-BEGIN 
-	UPDATE LichChieu 
-	SET TongTien = (GiaVe * SoVeDaBan) FROM LichChieu join inserted on LichChieu.MaShow = inserted.MaShow 
-	WHERE LichChieu.MaShow = inserted.MaShow 
-END
+
 
 -- store procedure 
 --1/ thêm tên phim vào danh sách 
@@ -297,6 +288,7 @@ BEGIN
     WHERE Phim.TenPhim = @TenPhim AND Ve.TrangThai = 'Trong'
     GROUP BY Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu, LichChieu.GiaVe
 END
+
 
 ---text------
 -----import------
