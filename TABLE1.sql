@@ -229,7 +229,33 @@ BEGIN
 	SET SoPhong = ( select count(MaPhong) from PhongChieu where MaRap= RAP.MaRap) 
 	from RAP join inserted on RAP.MaRap = inserted.MaRap 
 END 
+-- kiểm tra ngày chiếu phải sau ngày công chiếu và trước ngày kết thúc 
+CREATE TRIGGER UTG_INSERT_CheckDateLichChieu
+ON dbo.LichChieu
+FOR INSERT, UPDATE
+AS
+BEGIN
+	DECLARE @idDinhDang VARCHAR(50), @ThoiGianChieu DATE, @NgayKhoiChieu DATE, @NgayKetThuc DATE
 
+	SELECT @idDinhDang = MaPhim, @ThoiGianChieu = CONVERT(DATE, NgayChieu) from INSERTED
+
+	SELECT @NgayKhoiChieu = P.NgayKhoiChieu, @NgayKetThuc = P.NgayKetThuc
+	FROM dbo.Phim P, LichChieu
+	WHERE @idDinhDang = LichChieu.MaPhim AND LichChieu.MaPhim = P.MaPhim
+
+	IF ( @ThoiGianChieu > @NgayKetThuc or @ThoiGianChieu < @NgayKhoiChieu)
+	BEGIN
+		ROLLBACK TRAN
+		print ('Lịch Chiếu lớn hơn hoặc bằng Ngày Khởi Chiếu và nhỏ hơn hoặc bằng Ngày Kết Thúc')
+		Return
+    END
+END
+GO
+set dateformat dmy
+select* from LichChieu
+INSERT INTO LichChieu (MaShow, MaPhim, MaRap, MaPhong, NgayChieu, MaGioChieu, GiaVe, SoVeDaBan, TongTien) VALUES
+('LS10', 'FF01', 'CGV01', 'PC01', '18/05/2023', 'GC01', 100000, 50,0)
+select * from Phim
 
 -- store procedure 
 --1/ thêm tên phim vào danh sách 
