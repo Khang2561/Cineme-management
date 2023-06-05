@@ -65,3 +65,36 @@ INSERT INTO LichChieu VALUES (N'MLC402',N'TT10',N'MR04',N'PC402',N'01/01/2020',N
 INSERT INTO LichChieu VALUES (N'MLC501',N'MG07',N'MR05',N'PC501',N'15/11/2021',N'GC501',45000,50,2250000)
 INSERT INTO LichChieu VALUES (N'MLC601',N'LM02',N'MR06',N'PC601',N'04/06/2023',N'GC601',45000,20,900000)
 GO
+
+CREATE LOGIN nv1WITH PASSWORD = N'123';
+CREATE LOGIN ql1WITH PASSWORD = N'123';
+CREATE LOGIN gdWITH PASSWORD = N'123';
+
+CREATE USER nv1 FOR LOGIN nv1;
+CREATE USER ql1 FOR LOGIN ql1;
+CREATE USER gd FOR LOGIN gd;
+
+create role nhanvien;
+create role quanli;
+create role giamdoc;
+
+GRANT insert  , update,  delete  on Ve to nhanvien ;
+
+GRANT insert  , update,  delete  on LichChieu to quanli;
+GRANT insert  , update,  delete  on Ve to quanli ;
+
+GRANT ALL PRIVILEGES ON [dbo].[GioChieu] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[HangSX] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[LichChieu] to giamdoc with grant option;
+GRANT ALL PRIVILEGES ON [dbo].[NuocSX] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[Phim] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[PhongChieu] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[RAP] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[TheLoai] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[Ve] to giamdoc with grant option;
+
+
+
+Exec sp_addrolemember 'nhanvien','nv1'
+Exec sp_addrolemember 'quanli','ql1'
+Exec sp_addrolemember 'giamdoc','gd'
