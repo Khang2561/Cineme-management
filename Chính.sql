@@ -314,7 +314,15 @@ BEGIN
     WHERE Phim.TenPhim = @TenPhim AND Ve.TrangThai = 'Trong'
     GROUP BY Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu, LichChieu.GiaVe
 END
-
+-- NHAP VAO MA VE HIEN THI THONG TIN VE 
+ALTER PROCEDURE VE_THONGTIN_pro(@MaVe VARCHAR(10))
+AS 
+SELECT VE.MaVe,LC.MaPhong,LC.NgayChieu,MaGhe,LC.GiaVe,GC.XuatChieu,RAP.TenRap,RAP.MaRap,RAP.DiaChi,P.TenPhim FROM Ve AS Ve 
+	LEFT JOIN LichChieu as LC ON LC.MaShow = Ve.MaShow
+	LEFT JOIN GioChieu as GC ON GC.MaGioChieu=LC.MaGioChieu
+	LEFT JOIN RAP on LC.MaRap=RAP.MaRap 
+	LEFT JOIN Phim as P ON P.MaPhim=LC.MaPhim
+WHERE Ve.TrangThai = 'Ðã bán' AND Ve.MaVe=@MaVe
 
 ---text------
 -----import------
