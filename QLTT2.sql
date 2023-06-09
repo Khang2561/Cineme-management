@@ -80,12 +80,12 @@ create role nhanvien;
 create role quanli;
 create role giamdoc;
 ---phan quyen----
-GRANT insert  , update,  delete  on Ve to nhanvien ;
+GRANT select ,insert  , update,  delete  on Ve to nhanvien ;
 
-GRANT insert  , update,  delete  on LichChieu to quanli;
-GRANT insert  , update,  delete  on Ve to quanli ;
-GRANT insert  , update,  delete  on GioChieu to quanli ;
-GRANT insert  , update,  delete  on PhongChieu to quanli ;
+GRANT select ,insert  , update,  delete  on LichChieu to quanli;
+GRANT select ,insert  , update,  delete  on Ve to quanli ;
+GRANT select ,insert  , update,  delete  on GioChieu to quanli ;
+GRANT select ,insert  , update,  delete  on PhongChieu to quanli ;
 
 GRANT ALL PRIVILEGES ON [dbo].[GioChieu] to giamdoc with grant option;
 GRANT ALL PRIVILEGES ON [dbo].[LichChieu] to giamdoc with grant option;
@@ -97,15 +97,13 @@ GRANT ALL PRIVILEGES ON [dbo].[Phim] to giamdoc;
 GRANT ALL PRIVILEGES ON [dbo].[RAP] to giamdoc;
 GRANT ALL PRIVILEGES ON [dbo].[TheLoai] to giamdoc;
 
-DENY   insert  , update,  delete  On LichChieu to nhanvien;
+DENY   select ,insert  , update,  delete  On LichChieu to nhanvien;
 
-REVOKE    insert  , update  On LichChieu to nhanvien;
+REVOKE   select ,insert  , update  On LichChieu to nhanvien;
 ----add user vao role
 Exec sp_addrolemember 'nhanvien','nv1'
 Exec sp_addrolemember 'nhanvien','nv2'
 Exec sp_addrolemember 'quanli','ql1'
 Exec sp_addrolemember 'giamdoc','gd'
 
-DENY   insert  , update,  delete  On LichChieu to nhanvien;
 
-REVOKE    insert  , update  On LichChieu to nhanvien;
