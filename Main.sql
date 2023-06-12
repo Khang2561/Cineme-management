@@ -271,14 +271,19 @@ VALUES
 ('V025', 'CGV04', 'PC01', 'LS09', 'G05', 'Chưa bán'),
 ('V026', 'CGV04', 'PC01', 'LS09', 'G07', 'Đã bán')
 --2/ Cập nhập tổng số ghê của rap khi thêm xóa sữa 
-CREATE TRIGGER SoPhongRap ON PhongChieu AFTER INSERT AS
+CREATE TRIGGER SoPhongRap ON PhongChieu AFTER INSERT,UPDATE,DELETE AS 
 BEGIN
 	UPDATE RAP
 	SET TongSoGhe = RAP.TongSoGhe + (select TongSoGhe from inserted where MaRap = RAP.MaRap) 
-	from RAP join inserted on RAP.MaRap=inserted.MaRap
+	FROM RAP join inserted on RAP.MaRap=inserted.MaRap
 	UPDATE RAP 
-	SET SoPhong = ( select count(MaPhong) from PhongChieu where MaRap= RAP.MaRap) 
-	from RAP join inserted on RAP.MaRap = inserted.MaRap 
+	SET SoPhong =  (SELECT COUNT(*) FROM PhongChieu WHERE RAP.MaRap = PhongChieu.MaRap);
+
+	 DECLARE @MaRap varchar(10)
+    SELECT @MaRap = MaRap FROM DELETED
+    UPDATE RAP
+    SET TongSoGhe = (SELECT SUM(TongSoGhe) FROM PhongChieu WHERE MaRap = @MaRap) 
+    WHERE MaRap = @MaRap
 END 
 --3/ kiểm tra ngày chiếu phải sau ngày công chiếu và trước ngày kết thúc 
 CREATE TRIGGER UTG_INSERT_CheckDateLichChieu
