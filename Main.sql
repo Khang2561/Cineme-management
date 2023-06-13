@@ -367,7 +367,7 @@ BEGIN
     LEFT JOIN LichChieu ON Ve.MaShow = LichChieu.MaShow
     LEFT JOIN Phim ON Phim.MaPhim = LichChieu.MaPhim
     LEFT JOIN RAP ON LichChieu.MaRap = RAP.MaRap
-    WHERE Phim.TenPhim = @TenPhim AND Ve.TrangThai = 'Trong'
+    WHERE Phim.TenPhim = @TenPhim AND Ve.TrangThai = 'Chưa bán'
     GROUP BY Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu, LichChieu.GiaVe
 END
 -- NHAP VAO MA VE HIEN THI THONG TIN VE 
