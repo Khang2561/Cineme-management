@@ -353,7 +353,7 @@ BEGIN
 	PRINT ('Dữ liệu đã được thêm vào thành công ')
 END
 -- Nhập vào tên phim xuất ra các rạp có chiếu phim, xuất phim, ngày khởi chiếu 
-CREATE PROCEDURE TimVe (@TenPhim varchar(50))
+create PROCEDURE TimVe (@TenPhim varchar(50))
 AS
 BEGIN 
 	 IF NOT EXISTS (SELECT * FROM Phim WHERE TenPhim = @TenPhim)
@@ -362,14 +362,16 @@ BEGIN
         RETURN
     END
         
-    SELECT Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu, LichChieu.GiaVe, COUNT(Ve.MaVe) as 'Số vé còn trống '
+    SELECT Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu,GC.XuatChieu, LichChieu.GiaVe, COUNT(Ve.MaVe) as 'Số vé còn trống '
     FROM Ve
     LEFT JOIN LichChieu ON Ve.MaShow = LichChieu.MaShow
     LEFT JOIN Phim ON Phim.MaPhim = LichChieu.MaPhim
     LEFT JOIN RAP ON LichChieu.MaRap = RAP.MaRap
+	LEFT JOIN GioChieu as GC ON GC.MaGioChieu = LichChieu.MaGioChieu
     WHERE Phim.TenPhim = @TenPhim AND Ve.TrangThai = 'Chưa bán'
-    GROUP BY Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu, LichChieu.GiaVe
+    GROUP BY Phim.TenPhim, RAP.TenRap, RAP.DiaChi, LichChieu.NgayChieu, LichChieu.GiaVe,GC.XuatChieu
 END
+EXEC TimVe N'Fast and Furious 10'
 -- NHAP VAO MA VE HIEN THI THONG TIN VE 
 ALTER PROCEDURE VE_THONGTIN_pro(@MaVe VARCHAR(10))
 AS 
