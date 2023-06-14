@@ -139,10 +139,10 @@ INSERT [dbo].[Phim] ([MaPhim], [TenPhim], [MaHangSX], [DaoDien],[MaTheLoai],MaNu
 GO
 
 INSERT INTO RAP (MaRap, TenRap, DiaChi,  SoPhong, TongSoGhe) VALUES 
-('CGV01', 'CGV Hùng Vương Plaza', 'Hùng Vương, Phường 11, Quận 5, TP.HCM',  '4', '800'),
-('BHD02', 'BHD Star Vũng Tàu', '8 Lê Duẩn, Phường 1, Vũng Tàu', '3', '600'),
-('GAL03', 'Galaxy Quảng Trị', 'Lô B1, Khu đô thị mới Đông Hà, phường Đông Giang, TP Đông Hà, tỉnh Quảng Trị', '2', '400'),
-('CGV04', 'CGV Vincom Plaza Hà Tĩnh', 'Số 1 Lê Lợi, phường Đức Thọ, TP Hà Tĩnh',  '4', '800')
+('CGV01', 'CGV Hùng Vương Plaza', 'Hùng Vương, Phường 11, Quận 5, TP.HCM',  0, 0),
+('BHD02', 'BHD Star Vũng Tàu', '8 Lê Duẩn, Phường 1, Vũng Tàu', 0, 0),
+('GAL03', 'Galaxy Quảng Trị', 'Lô B1, Khu đô thị mới Đông Hà, phường Đông Giang, TP Đông Hà, tỉnh Quảng Trị', 0, 0),
+('CGV04', 'CGV Vincom Plaza Hà Tĩnh', 'Số 1 Lê Lợi, phường Đức Thọ, TP Hà Tĩnh',  0, 0)
 
 INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES 
 ('GC01', 'CGV01', '8:00'),
