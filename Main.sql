@@ -1,6 +1,6 @@
-CREATE DATABASE CINEMA
+CREATE DATABASE CINEMA2
 GO
-USE CINEMA
+USE CINEMA2
 GO
 CREATE TABLE HangSX(
 	MaHangSX varchar(10) not null,
@@ -48,7 +48,7 @@ CREATE TABLE RAP(
 CREATE TABLE GioChieu(
 	MaGioChieu varchar(10) not null,
 	MaRap varchar(10),
-	XuatChieu text,
+	XuatChieu time,
 	CONSTRAINT PK_GioChieu PRIMARY KEY(MaGioChieu),
 	CONSTRAINT FK_MaRap FOREIGN KEY(MaRap) references RAP(MaRap)	
 );
@@ -155,6 +155,7 @@ INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES
 ('GV01', 'CGV04', '8:00'),
 ('GV02', 'CGV04', '10:00')
 
+
 INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES
 ('PC01', 'CGV01',  200),
 ('PC02', 'CGV01',  200),
@@ -165,6 +166,7 @@ INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES
 ('PG02', 'GAL03',  150),
 ('PV01', 'CGV04',  200),
 ('PV02', 'CGV04',  200)
+
 
 INSERT INTO LichChieu (MaShow, MaPhim, MaRap, MaPhong, NgayChieu, MaGioChieu, GiaVe, SoVeDaBan, TongTien) VALUES
 ('LS01', 'FF01', 'CGV01', 'PC01', '19/05/2023', 'GC01', 100000, 50,0),
@@ -249,27 +251,6 @@ VALUES
 ('V018', 'BHD02', 'PC02', 'LS01', 'F09', 'Đã bán'),
 ('V019', 'BHD02', 'PC03', 'LS01', 'L010', 'Chưa bán'),
 ('V020', 'BHD02', 'PC01', 'LS01', 'L011', 'Đã bán')
-DELETE  VE
-SELECT * FROM Ve
-SELECT * FROM LichChieu
------
---trigger 
---1/ cập nhập số vé đã bán và tổng doanh thu mà lịch chiếu đó đã bán 
-CREATE trigger SoVeDaBan on Ve after INSERT AS
-Begin 
-	UPDATE LichChieu 
-	SET SoVeDaBan = (select count(*) from Ve where Ve.MaShow = LichChieu.MaShow AND TrangThai ='Đã bán' );
-	UPDATE LichChieu
-	SET TongTien = (GiaVe * SoVeDaBan); 
-END
-INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai)
-VALUES
-('V021', 'CGV04', 'PC01', 'LS09', 'G01', 'Đã bán'),
-('V022', 'CGV04', 'PC01', 'LS09', 'G02', 'Đã bán'),
-('V023', 'CGV04', 'PC01', 'LS09', 'G03', 'Chưa bán'),
-('V024', 'CGV04', 'PC01', 'LS09', 'G04', 'Chưa bán'),
-('V025', 'CGV04', 'PC01', 'LS09', 'G05', 'Chưa bán'),
-('V026', 'CGV04', 'PC01', 'LS09', 'G07', 'Đã bán')
 --2/ Cập nhập tổng số ghê của rap khi thêm xóa sữa 
 CREATE TRIGGER SoPhongRap ON PhongChieu AFTER INSERT,UPDATE,DELETE AS 
 BEGIN
