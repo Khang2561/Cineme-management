@@ -363,5 +363,44 @@ SELECT VE.MaVe,LC.MaPhong,LC.NgayChieu,MaGhe,LC.GiaVe,GC.XuatChieu,RAP.TenRap,RA
 	LEFT JOIN Phim as P ON P.MaPhim=LC.MaPhim
 WHERE Ve.TrangThai = 'Ðã bán' AND Ve.MaVe=@MaVe
 
----text------
------import------
+---tao login--
+CREATE LOGIN nv1 WITH PASSWORD = N'123';
+CREATE LOGIN nv2 WITH PASSWORD = N'123';
+CREATE LOGIN ql1 WITH PASSWORD = N'123';
+CREATE LOGIN gd WITH PASSWORD = N'123';
+---tao user---
+CREATE USER nv1 FOR LOGIN nv1;
+CREATE USER nv2 FOR LOGIN nv2;
+CREATE USER ql1 FOR LOGIN ql1;
+CREATE USER gd FOR LOGIN gd;
+---tao role---
+create role nhanvien;
+create role quanli;
+create role giamdoc;
+---phan quyen----
+GRANT select ,insert  , update,  delete  on Ve to nhanvien ;
+
+GRANT select ,insert  , update,  delete  on LichChieu to quanli;
+GRANT select ,insert  , update,  delete  on Ve to quanli ;
+GRANT select ,insert  , update,  delete  on GioChieu to quanli ;
+GRANT select ,insert  , update,  delete  on PhongChieu to quanli ;
+
+GRANT ALL PRIVILEGES ON [dbo].[GioChieu] to giamdoc with grant option;
+GRANT ALL PRIVILEGES ON [dbo].[LichChieu] to giamdoc with grant option;
+GRANT ALL PRIVILEGES ON [dbo].[PhongChieu] to giamdoc with grant option;
+GRANT ALL PRIVILEGES ON [dbo].[Ve] to giamdoc with grant option;
+GRANT ALL PRIVILEGES ON [dbo].[HangSX] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[NuocSX] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[Phim] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[RAP] to giamdoc;
+GRANT ALL PRIVILEGES ON [dbo].[TheLoai] to giamdoc;
+
+DENY   select ,insert  , update,  delete  On LichChieu to nhanvien;
+
+REVOKE   select ,insert  , update  On LichChieu to nhanvien;
+----add user vao role
+Exec sp_addrolemember 'nhanvien','nv1'
+Exec sp_addrolemember 'nhanvien','nv2'
+Exec sp_addrolemember 'quanli','ql1'
+Exec sp_addrolemember 'giamdoc','gd'
+
