@@ -1,6 +1,6 @@
-CREATE DATABASE CINEMA2
+CREATE DATABASE CINEMA3
 GO
-USE CINEMA2
+USE CINEMA3
 GO
 CREATE TABLE HangSX(
 	MaHangSX varchar(10) not null,
@@ -144,28 +144,26 @@ INSERT INTO RAP (MaRap, TenRap, DiaChi,  SoPhong, TongSoGhe) VALUES
 ('GAL03', N'Galaxy Quảng Trị', N'Lô B1, Khu đô thị mới Đông Hà, phường Đông Giang, TP Đông Hà, tỉnh Quảng Trị', 0, 0),
 ('CGV04', N'CGV Vincom Plaza Hà Tĩnh', N'Số 1 Lê Lợi, phường Đức Thọ, TP Hà Tĩnh',  0, 0)
 
-INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES 
-('GC01', 'CGV01', '8:00'),
-('GC02', 'CGV01', '10:00'),
-('GC03', 'CGV01', '11:00'),
-('GB01', 'BHD02', '8:00'),
-('GB02', 'BHD02', '11:00'),
-('GG01', 'GAL03', '10:00'),
-('GG02', 'GAL03','11:00'),
-('GV01', 'CGV04', '8:00'),
-('GV02', 'CGV04', '10:00')
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GC01', 'CGV01', '8:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GC02', 'CGV01', '10:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GC03', 'CGV01', '11:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GB01', 'BHD02', '8:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GB02', 'BHD02', '11:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GG01', 'GAL03', '10:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GG02', 'GAL03','11:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GV01', 'CGV04', '8:00');
+INSERT INTO GioChieu (MaGioChieu, MaRap, XuatChieu) VALUES ('GV02', 'CGV04', '10:00');
 
 
-INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES
-('PC01', 'CGV01',  200),
-('PC02', 'CGV01',  200),
-('PC03', 'CGV01',  200),
-('PB01', 'BHD02',  180),
-('PB02', 'BHD02',  200),
-('PG01', 'GAL03',  150),
-('PG02', 'GAL03',  150),
-('PV01', 'CGV04',  200),
-('PV02', 'CGV04',  200)
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PC01', 'CGV01',  200);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PC02', 'CGV01',  200);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PC03', 'CGV01',  200);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PB01', 'BHD02',  180);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PB02', 'BHD02',  200);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PG01', 'GAL03',  150);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PG02', 'GAL03',  150);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PV01', 'CGV04',  200);
+INSERT INTO PhongChieu (MaPhong, MaRap,TongSoGhe) VALUES('PV02', 'CGV04',  200);
 
 
 INSERT INTO LichChieu (MaShow, MaPhim, MaRap, MaPhong, NgayChieu, MaGioChieu, GiaVe, SoVeDaBan, TongTien) VALUES
@@ -229,28 +227,31 @@ INSERT INTO LichChieu (MaShow, MaPhim, MaRap, MaPhong, NgayChieu, MaGioChieu, Gi
 ('LS86', 'CN11', 'GAL03', 'PV02', '01/12/2022', 'GV02', 90000, 25, 0)
 
 
-INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai)
-VALUES
-('V001', 'CGV01', 'PC01', 'LS01', 'G01', 'Đã bán'),
-('V002', 'CGV01', 'PC01', 'LS01', 'G02', 'Đã bán'),
-('V003', 'CGV01', 'PC01', 'LS01', 'G03', 'Chưa bán'),
-('V004', 'CGV01', 'PC01', 'LS01', 'G04', 'Chưa bán'),
-('V005', 'CGV01', 'PC01', 'LS01', 'G05', 'Chưa bán'),
-('V006', 'CGV01', 'PC01', 'LS01', 'G07', 'Đã bán'),
-('V007', 'CGV01', 'PC02', 'LS01', 'A08', 'Đã bán'),
-('V008', 'CGV01', 'PC03', 'LS01', 'F09', 'Đã bán'),
-('V009', 'CGV01', 'PC01', 'LS01', 'L010', 'Chưa bán'),
-('V010', 'CGV01', 'PC01', 'LS01', 'L011', 'Đã bán'),
-('V011', 'BHD02', 'PC01', 'LS01', 'G01', 'Đã bán'),
-('V012', 'BHD02', 'PC02', 'LS01', 'G02', 'Đã bán'),
-('V013', 'BHD02', 'PC03', 'LS01', 'G03', 'Chưa bán'),
-('V014', 'BHD02', 'PC01', 'LS01', 'G04', 'Chưa bán'),
-('V015', 'BHD02', 'PC02', 'LS01', 'G05', 'Chưa bán'),
-('V016', 'BHD02', 'PC03', 'LS01', 'G07', 'Đã bán'),
-('V017', 'BHD02', 'PC01', 'LS01', 'A08', 'Đã bán'),
-('V018', 'BHD02', 'PC02', 'LS01', 'F09', 'Đã bán'),
-('V019', 'BHD02', 'PC03', 'LS01', 'L010', 'Chưa bán'),
-('V020', 'BHD02', 'PC01', 'LS01', 'L011', 'Đã bán')
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES ('V001', 'CGV01', 'PC01', 'LS01', 'G01', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V002', 'CGV01', 'PC01', 'LS01', 'G02', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V003', 'CGV01', 'PC01', 'LS01', 'G03', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V004', 'CGV01', 'PC01', 'LS01', 'G04', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V005', 'CGV01', 'PC01', 'LS01', 'G05', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V006', 'CGV01', 'PC01', 'LS01', 'G07', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V007', 'CGV01', 'PC02', 'LS01', 'A08', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V008', 'CGV01', 'PC03', 'LS01', 'F09', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V009', 'CGV01', 'PC01', 'LS01', 'L010', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V010', 'CGV01', 'PC01', 'LS01', 'L011', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V011', 'BHD02', 'PC01', 'LS01', 'G01', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V012', 'BHD02', 'PC02', 'LS01', 'G02', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V013', 'BHD02', 'PC03', 'LS01', 'G03', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V014', 'BHD02', 'PC01', 'LS01', 'G04', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V015', 'BHD02', 'PC02', 'LS01', 'G05', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V016', 'BHD02', 'PC03', 'LS01', 'G07', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V017', 'BHD02', 'PC01', 'LS01', 'A08', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V018', 'BHD02', 'PC02', 'LS01', 'F09', 'Đã bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V019', 'BHD02', 'PC03', 'LS01', 'L010', 'Chưa bán');
+INSERT INTO Ve (MaVe, MaRap, MaPhong, MaShow, MaGhe, TrangThai) VALUES('V020', 'BHD02', 'PC01', 'LS01', 'L011', 'Đã bán');
+delete Ve
+delete LichChieu
+delete GioChieu
+delete PhongChieu
+delete RAP
 --2/ Cập nhập tổng số ghê của rap khi thêm xóa sữa 
 CREATE TRIGGER SoPhongRap ON PhongChieu AFTER INSERT,UPDATE,DELETE AS 
 BEGIN
@@ -362,7 +363,8 @@ SELECT VE.MaVe,LC.MaPhong,LC.NgayChieu,MaGhe,LC.GiaVe,GC.XuatChieu,RAP.TenRap,RA
 	LEFT JOIN RAP on LC.MaRap=RAP.MaRap 
 	LEFT JOIN Phim as P ON P.MaPhim=LC.MaPhim
 WHERE Ve.TrangThai = 'Ðã bán' AND Ve.MaVe=@MaVe
-
+EXEC PROCEDURE VE_THONGTIN_pro 
+select * from Ve
 ---tao login--
 CREATE LOGIN nv1 WITH PASSWORD = N'123';
 CREATE LOGIN nv2 WITH PASSWORD = N'123';
@@ -403,4 +405,3 @@ Exec sp_addrolemember 'nhanvien','nv1'
 Exec sp_addrolemember 'nhanvien','nv2'
 Exec sp_addrolemember 'quanli','ql1'
 Exec sp_addrolemember 'giamdoc','gd'
-
